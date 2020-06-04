@@ -6,6 +6,17 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+        {% block menu %}
+            <aside>
+                <ul>
+                    <li>
+                        <a href="{{ path('index')}}">Home</a>
+                        <a href="{{ path('user')}}">User</a>
+                        <a href="{{ path('assets')}}">Assets</a>
+                    </li>
+                </ul>
+            </aside>
+        {% endblock %}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
