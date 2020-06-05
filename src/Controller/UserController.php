@@ -12,8 +12,11 @@ class UserController extends AbstractController
      */
     public function index()
     {
+        $user = $this->getUser();
+        $assets = $user->getAssets();
+
         return $this->render('user/index.html.twig', [
-            'controller_name' => 'UserController',
+            'assets' => $assets
         ]);
     }
 }

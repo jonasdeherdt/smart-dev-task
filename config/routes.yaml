@@ -1,6 +1,12 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+index:
+    path: /
+    controller: App\Controller\AssetController::index
+assets:
+    path: /assets
+    controller: App\Controller\AssetController::index
+new_asset:
+    path: /assets/new
+    controller: App\Controller\AssetController::new
 user:
     path: /user
     controller: App\Controller\UserController::index
