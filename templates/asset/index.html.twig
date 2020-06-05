@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Your assets{% endblock %}
+{% block body %}
+
+<a href="{{ path('new_asset')}}">New Asset</a>
+<p> 
+    {% for a in assets %}
+        <a href="{{ a.path }}">{{a.name}}</a>
+    {% endfor %}
+<p/>
+{% endblock %}
