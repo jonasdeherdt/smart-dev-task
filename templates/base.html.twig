@@ -10,9 +10,12 @@
             <aside>
                 <ul>
                     <li>
-                        <a href="{{ path('index')}}">Home</a>
-                        <a href="{{ path('user')}}">User</a>
                         <a href="{{ path('assets')}}">Assets</a>
+                        {% if is_granted('ROLE_USER') %}
+                            <a href="{{ path('user')}}">My Account</a>
+                        {% else %}
+                            <a href="{{ path('app_login')}}">Log In</a>
+                        {% endif %} 
                     </li>
                 </ul>
             </aside>
