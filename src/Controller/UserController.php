@@ -12,6 +12,7 @@ class UserController extends AbstractController
      */
     public function index()
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         $user = $this->getUser();
         $assets = $user->getAssets();
 
