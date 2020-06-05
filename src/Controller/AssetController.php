@@ -28,18 +28,30 @@ class AssetController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/assets/new", name="new_asset")
+     */
     public function new(Request $request)
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
 
-        $user = $this->getUser();
         $asset = new Asset();
-        $asset->setName('Asset name');
-        $asset->setPath('path to your asset');
-        $asset->setOwner($user);
-
         $form = $this->createForm(AssetType::class, $asset);
-        
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $data = $form->getData();
+            $user = $this->getUser();
+            $asset->setOwner($user);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($asset);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('asset');
+        }
+
         return $this->render('asset/new.html.twig', [
             'form' => $form->createView()
         ]);
