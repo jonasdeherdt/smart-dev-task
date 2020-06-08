@@ -14,11 +14,16 @@ class AssetType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class)
+            ->add('name', TextType::class, [
+                'attr' => ['class'=> 'form-control']
+                ])
             ->add('attachment', FileType::class, [
                 'mapped' => false,
+                'attr' => ['class'=> 'form-attachment']
             ])
-            ->add('save', SubmitType::class)
+            ->add('save', SubmitType::class, [
+                'attr' => ['class'=> 'btn btn-sm btn-primary']
+            ])
         ;
     }
 }

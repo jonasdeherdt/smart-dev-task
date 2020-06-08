@@ -1,0 +1,34 @@
+.assets {
+
+    .asset {
+        border: 0.1em solid #cfcfcf;
+        margin-bottom: 2em;
+        padding: 0.5em;
+        background-color: #fdfdfd;
+
+        span {
+            display: block;
+            max-width: 90%;
+
+            &.name {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+}
+
+.create-asset-wrapper {
+    form {
+        label {
+            margin:0.5em 0;
+        }
+
+        input {
+            padding:0.5em;
+            width: 50%;
+            min-width: 180px;
+        }
+    }
+}

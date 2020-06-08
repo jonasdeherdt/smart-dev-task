@@ -1,0 +1,34 @@
+.btn {
+        display:inline-block;
+        padding:0.5em 2em;
+        border:0.1em solid #d8d8d8;
+        margin:1em 0;
+        border-radius:0.2em;
+        box-sizing: border-box;
+        color: $primary-color;
+        text-align:center;
+            background-color: #efefef;
+
+        &:hover{
+            background-color: #eaeaea;
+            cursor: pointer;
+        }
+}
+
+a {
+    &.btn{
+            text-decoration: none;
+        }
+}
+
+.btn-primary:active:focus,
+.btn-primary:active {
+    background-color: #eaeaea !important;
+    border:0.1em solid #d8d8d8 !important;
+}
+
+
+.btn-primary:hover {
+    color: $primary-color;
+    border:0.1em solid #d8d8d8;
+}

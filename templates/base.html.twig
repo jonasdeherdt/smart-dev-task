@@ -5,21 +5,20 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
+            <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet"> 
         {% endblock %}
         
     </head>
-    <body>
+    <body class='{% block classes %}{% endblock %}'>
         {% block menu %}
-            <aside>
+            <aside class='main-menu'>
                 <ul>
-                    <li>
-                        <a href="{{ path('assets')}}">Assets</a>
-                        {% if is_granted('ROLE_USER') %}
-                            <a href="{{ path('user')}}">My Account</a>
-                        {% else %}
-                            <a href="{{ path('app_login')}}">Log In</a>
-                        {% endif %} 
-                    </li>
+                    <li><a href="{{ path('assets')}}">Assets</a></li>
+                    {% if is_granted('ROLE_USER') %}
+                        <li><a href="{{ path('user')}}">My Account</a></li>
+                    {% else %}
+                        <li><a href="{{ path('app_login')}}">Log In</a></li>
+                    {% endif %} 
                 </ul>
             </aside>
         {% endblock %}

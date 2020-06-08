@@ -2,11 +2,26 @@
 
 {% block title %}Your assets{% endblock %}
 {% block body %}
-
-<a href="{{ path('new_asset')}}">New Asset</a>
-<p> 
-    {% for a in assets %}
-        <a href="{{ a.path }}">{{a.name}}</a>
-    {% endfor %}
-<p/>
+<div class="assets-wrapper">
+    <div class="container-fluid">
+        <a class='btn' href="{{ path('new_asset')}}">Create new Asset</a>
+    </div>
+    
+    <div class="assets container-fluid">
+        {% for row in assets |batch(6) %}
+            <div class="row">
+                {% for asset in row %}
+                    <div class="col-2">
+                        <div class="asset">
+                            <i class="fas fa-file"></i>
+                            <span class='name'>Name: {{asset.name}}</span>
+                            <span class='view'><a href="{{ asset('attachments/' ~ asset.path) }}">View attachment</a></span>
+                            <span class='delete'><a href="{{ asset('attachments/' ~ asset.path) }}">Delete attachment</a></span>
+                            {{dump(asset.path)}}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+</div>
 {% endblock %}

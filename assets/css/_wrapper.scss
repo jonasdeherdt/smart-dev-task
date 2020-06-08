@@ -1,0 +1,25 @@
+.login-wrapper,
+.account-wrapper,
+.assets-wrapper,
+.create-asset-wrapper {
+    margin: 2em auto;
+    padding: 2em;
+    background-color: #f3f3f3;
+    border-radius: 5px;
+
+    -webkit-box-shadow: 0px 1px 2px 1px #e8e8e8;
+    -moz-box-shadow: 0px 1px 2px 1px #e8e8e8;
+    box-shadow: 0px 1px 2px 1px #e8e8e8;
+}
+
+.create-asset-wrapper,
+.login-wrapper{
+    width: 50%;
+}
+
+.account-wrapper,
+.assets-wrapper {
+    width: auto;
+    max-width: $max-width;
+    margin: 2em;
+}

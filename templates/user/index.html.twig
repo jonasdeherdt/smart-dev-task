@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello User{% endblock %}
+{% block classes %}account-page{% endblock %}
 {% block body %}
-
-<div class="example-wrapper">
+<div class="account-wrapper">
     <h1>Hello {{ app.user.username }}</h1>
     <a href="{{ path('app_logout')}}">Log out</a>
 </div>
