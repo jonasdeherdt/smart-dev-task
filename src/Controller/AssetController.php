@@ -43,7 +43,16 @@ class AssetController extends AbstractController
 
             $data = $form->getData();
             $user = $this->getUser();
+            
+            $file = $form['attachment']->getData();
+            $name = $this->createSlug($form['name']->getData());
+            $newFilename = $this->generateFileName($file, $name);
+            
+            $file->move($this->getParameter('attachments_directory'), $newFilename);
+
             $asset->setOwner($user);
+            $asset->setName($name);
+            $asset->setPath($newFilename);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($asset);
@@ -53,7 +62,20 @@ class AssetController extends AbstractController
         }
 
         return $this->render('asset/new.html.twig', [
-            'form' => $form->createView()
-        ]);
+            'form' => $form->createView(),
+            ]);
+    }
+
+    private function generateFileName($file, $name){
+        $extension = $file->guessExtension();
+        if (!$extension) $extension = 'png';
+
+        $name = $name.'.'.$extension;
+        return $name;
+    }
+
+    private function createSlug($string)
+    {
+        return strtolower(trim(preg_replace('~[^0-9a-z]+~i', '-', html_entity_decode(preg_replace('~&([a-z]{1,2})(?:acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '$1', htmlentities($string, ENT_QUOTES, 'UTF-8')), ENT_QUOTES, 'UTF-8')), '-'));
     }
 }
