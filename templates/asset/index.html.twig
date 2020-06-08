@@ -13,11 +13,23 @@
                 {% for asset in row %}
                     <div class="col-2">
                         <div class="asset">
-                            <i class="fas fa-file"></i>
+                            <a target='_blank' href="{{ asset('attachments/' ~ asset.path) }}">
+                                {% set type = asset.path| split('.')[1] %}
+                                {% if type == 'xlsx' %}
+                                    <i class="far fa-file-excel"></i>
+                                {% elseif type == 'pdf' %}
+                                    <i class="far fa-file-pdf"></i>
+                                {% elseif type == 'png' or type == 'jpg' or type == 'jpeg' %}
+                                    <i class="far fa-file-image"></i>
+                                {% elseif type == 'html' or type == 'css' or type == 'js' %}
+                                    <i class="far fa-file-code"></i>
+                                {% else %}
+                                    <i class="fas fa-file"></i>
+                                {% endif %}
+                            </a>
                             <span class='name'>Name: {{asset.name}}</span>
-                            <span class='view'><a href="{{ asset('attachments/' ~ asset.path) }}">View attachment</a></span>
-                            <span class='delete'><a href="{{ asset('attachments/' ~ asset.path) }}">Delete attachment</a></span>
-                            {{dump(asset.path)}}
+                            <span class='view'><a target='_blank' href="{{ asset('attachments/' ~ asset.path) }}">View attachment</a></span>
+                            <span class='delete'><a target='_blank' href="{{ asset('attachments/' ~ asset.path) }}">Delete attachment</a></span>
                         </div>
                     </div>
                 {% endfor %}
