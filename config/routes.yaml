@@ -7,6 +7,12 @@ assets:
 new_asset:
     path: /assets/new
     controller: App\Controller\AssetController::new
+delete_asset:
+    path: /assets/delete/{id}
+    controller: App\Controller\AssetController::delete
+download_asset:
+    path: /assets/download/{id}
+    controller: App\Controller\AssetController::download
 user:
     path: /user
     controller: App\Controller\UserController::index

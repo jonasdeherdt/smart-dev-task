@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\HeaderUtils;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 use App\Entity\User;
 use App\Entity\Asset;
@@ -64,6 +66,41 @@ class AssetController extends AbstractController
         return $this->render('asset/new.html.twig', [
             'form' => $form->createView(),
             ]);
+    }
+
+    /**
+     * @Route("/assets/delete/{id}", name="delete_asset")
+     */
+    public function delete(string $id)
+    {
+        $assetRepo = $this->getDoctrine()->getRepository(Asset::class);
+        $asset = $assetRepo->findOneById($id);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($asset);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('asset');
+    }
+
+    /**
+     * @Route("/assets/download/{id}", name="download_asset")
+     */
+    public function download(string $id)
+    {
+        $assetRepo = $this->getDoctrine()->getRepository(Asset::class);
+        $asset = $assetRepo->findOneById($id);
+
+        $file =  $this->getParameter('attachments_directory') . '/' . $asset->getPath();
+        $response = new Response($file);
+
+        $disposition = HeaderUtils::makeDisposition(
+            HeaderUtils::DISPOSITION_ATTACHMENT,
+            $asset->getPath()
+        );
+
+        $response->headers->set('Content-Disposition', $disposition);
+        return $response;
     }
 
     private function generateFileName($file, $name){
